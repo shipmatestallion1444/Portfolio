@@ -8,4 +8,8 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://benehasler.dev',
 	integrations: [mdx(), sitemap()],
+	redirects: {
+		"/eppendorf": "https://www.eppendorf.com/us-en"
+	}
 });
+
