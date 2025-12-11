@@ -4,18 +4,69 @@ import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
 const pageTitle = "Projects";
+
+const identity = {
+  firstName: "Bene",
+  country: "Germany",
+  occupation: "Working Student",
+  workplaceName: "Eppendorf SE",
+  workplaceUrl: "https://www.eppendorf.com/us-en",
+  hobbies: ["photography", "birdwatching", "baseball"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "Python", "FastAPI", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "crimson";
 ---
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={pageTitle} description={SITE_DESCRIPTION} />
+		<BaseHead title={pageTitle} description={SITE_DESCRIPTION} /> 
+        <style define:vars={{skillColor}}>
+        h1 {
+            color: purple;
+            font-size: 4rem;
+        }
+        p {
+            color: darkmagenta;
+        }
+        .skill {
+            color: var(--skillColor);
+            font-weight: bold;
+        }
+        </style>
 	</head>
 	<body>
 		<Header />
 		<main>
             <h1>
-                My Projects
+                {pageTitle}
             </h1>
+            <p>
+                Few facts about me:
+                <ul>
+                    <li>My name is {identity.firstName}.</li>
+                    <li>I live in {identity.country} and right now, I work as a {identity.occupation} at <a href={identity.workplaceUrl}>{identity.workplaceName}</a>.</li>
+                    {identity.hobbies.length >= 2 &&
+                        <li>Two of my hobbies are: {identity.hobbies[0]} and {identity.hobbies[1]}</li>
+                    }
+                </ul>
+            </p>
+            <p>My skills are:</p>
+                <ul>
+                {skills.map((skill) => <li class="skill" >{skill}</li>)}
+                </ul>
+            
+            {happy && <p>I am happy to be learning Astro!</p>}
+
+            {finished ? <p>I finished this tutorial!</p> : <p>I have not finished this tut. Dang.</p>}
+
+            {goal === 3 ? <p>My goal is to finish in 3 days.</p> : <p>My goal is not 3 days.</p>}
+            
             <p>
                 This is where I will post my professional and personal projects. Check back later to check them out!
             </p>
